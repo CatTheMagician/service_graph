@@ -1,10 +1,6 @@
 defmodule ServiceGraphWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :service_graph
 
-  socket "/socket", ServiceGraphWeb.UserSocket,
-    websocket: true,
-    longpoll: false
-
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phx.digest

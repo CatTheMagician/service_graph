@@ -1,0 +1,23 @@
+<h1>Listing Consumes</h1>
+
+<table>
+  <thead>
+    <tr>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for consume <- @consumes do %>
+    <tr>
+      <td>
+        <span><%= link "Show", to: Routes.consume_path(@conn, :show, consume) %></span>
+        <span><%= link "Edit", to: Routes.consume_path(@conn, :edit, consume) %></span>
+        <span><%= link "Delete", to: Routes.consume_path(@conn, :delete, consume), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Consume", to: Routes.consume_path(@conn, :new) %></span>

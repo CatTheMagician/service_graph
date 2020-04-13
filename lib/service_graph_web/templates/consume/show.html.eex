@@ -1,0 +1,8 @@
+<h1>Show Consume</h1>
+
+<ul>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.consume_path(@conn, :edit, @consume) %></span>
+<span><%= link "Back", to: Routes.consume_path(@conn, :index) %></span>

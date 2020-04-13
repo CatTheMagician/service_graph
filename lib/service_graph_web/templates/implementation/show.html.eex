@@ -1,0 +1,13 @@
+<h1>Show Implementation</h1>
+
+<ul>
+
+  <li>
+    <strong>Action name:</strong>
+    <%= @implementation.action_name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.implementation_path(@conn, :edit, @implementation) %></span>
+<span><%= link "Back", to: Routes.implementation_path(@conn, :index) %></span>

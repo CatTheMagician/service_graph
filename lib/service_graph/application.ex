@@ -8,12 +8,8 @@ defmodule ServiceGraph.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      # Start the Ecto repository
       ServiceGraph.Repo,
-      # Start the endpoint when the application starts
       ServiceGraphWeb.Endpoint
-      # Starts a worker by calling: ServiceGraph.Worker.start_link(arg)
-      # {ServiceGraph.Worker, arg},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

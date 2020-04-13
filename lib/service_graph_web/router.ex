@@ -16,11 +16,17 @@ defmodule ServiceGraphWeb.Router do
   scope "/", ServiceGraphWeb do
     pipe_through :browser
 
+    resources "/services", ServiceController
+    resources "/implementations", ImplementationController
+    resources "/consumes", ConsumeController
+
     get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", ServiceGraphWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", ServiceGraphWeb do
+    pipe_through :api
+
+    post "/relations/:service_name/bulk_definition", Api.RelationController, :bulk_definition
+  end
 end
