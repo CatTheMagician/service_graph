@@ -93,6 +93,12 @@ defmodule ServiceGraph.Implementations do
     Repo.delete(implementation)
   end
 
+  def delete_implementations_by_service_id(id) do
+    query = from(t in Implementation, where: t.service_id == ^id)
+
+    Repo.delete_all(query)
+  end
+
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking implementation changes.
 

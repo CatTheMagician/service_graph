@@ -1,10 +1,12 @@
-<div class="legend container">
-  <p>Кружок - сервис</p>
-  <p>Прямоугольник - метод АПИ</p>
-  <p>Линия - принадлежность метода к сервису</p>
-  <p>Пунктирная линия - интеграция (использование АПИ другим сервисом)</p>
+<div class="container">
+  <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/dot.png") %>"><span>сервис</span></img></div>
+  <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/action.png") %>"><span>точка интеграции (API)</span></img></div>
+  <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/arrow_dashed.png") %>"><span>использует API</span></img></div>
+  <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/implementation.png") %>"><span>реализует API</span></img></div>
 </div>
+<hr/>
 <div id="service_network" style="width:100%; height: 100%" 
   nodes="<%=Jason.encode!(@nodes)%>"
   edges="<%=Jason.encode!(@edges)%>"
-></div>
+>
+</div>

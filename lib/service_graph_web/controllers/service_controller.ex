@@ -3,6 +3,7 @@ defmodule ServiceGraphWeb.ServiceController do
 
   alias ServiceGraph.Services
   alias ServiceGraph.Services.Service
+  alias ServiceGraph.UseCases.DeleteService
 
   def index(conn, _params) do
     services = Services.list_services()
@@ -52,8 +53,7 @@ defmodule ServiceGraphWeb.ServiceController do
   end
 
   def delete(conn, %{"id" => id}) do
-    service = Services.get_service!(id)
-    {:ok, _service} = Services.delete_service(service)
+    :ok = DeleteService.call(id)
 
     conn
     |> put_flash(:info, "Service deleted successfully.")

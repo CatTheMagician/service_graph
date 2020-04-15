@@ -4,3 +4,25 @@
 html, body {
   height: 90%;
 }
+
+hr {
+  border-color: #0069d9;
+}
+
+.legeng img {
+  width: 50px;
+  max-height: 22px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.legeng span {
+  position: relative;
+  left: 30px;
+}
+
+.legeng {
+  display: inline-block;
+  width: 300px;
+  margin-right: 50px;
+}

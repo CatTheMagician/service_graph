@@ -16,6 +16,7 @@ defmodule ServiceGraphWeb.PageController do
         %{
           size: 50,
           shape: "dot",
+          mass: 1,
           label: service.title,
           id: "service_#{service.id}"
         }
@@ -24,7 +25,7 @@ defmodule ServiceGraphWeb.PageController do
     actions =
       Implementations.list_implementations()
       |> Enum.map(fn impl ->
-        %{shape: "box", label: "#" <> impl.action_name, id: "action_#{impl.id}"}
+        %{shape: "box", mass: 5, label: "#" <> impl.action_name, id: "action_#{impl.id}"}
       end)
 
     services ++ actions
@@ -33,12 +34,22 @@ defmodule ServiceGraphWeb.PageController do
   defp edges do
     implementations =
       Implementations.list_implementations()
-      |> Enum.map(fn impl -> %{from: "service_#{impl.service_id}", to: "action_#{impl.id}"} end)
+      |> Enum.map(fn impl ->
+        %{
+          from: "service_#{impl.service_id}",
+          to: "action_#{impl.id}"
+        }
+      end)
 
     consuming =
       Consumes.list_consumes()
       |> Enum.map(fn consume ->
-        %{dashes: true, from: "service_#{consume.service_id}", to: "action_#{consume.action_id}"}
+        %{
+          dashes: true,
+          arrows: "to",
+          from: "service_#{consume.service_id}",
+          to: "action_#{consume.action_id}"
+        }
       end)
 
     implementations ++ consuming

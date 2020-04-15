@@ -89,6 +89,12 @@ defmodule ServiceGraph.Consumes do
     Repo.delete(consume)
   end
 
+  def delete_consumes_by_service_id(id) do
+    query = from(t in Consume, where: t.service_id == ^id)
+
+    Repo.delete_all(query)
+  end
+
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking consume changes.
 
