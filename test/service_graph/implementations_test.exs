@@ -6,8 +6,8 @@ defmodule ServiceGraph.ImplementationsTest do
   describe "implementations" do
     alias ServiceGraph.Implementations.Implementation
 
-    @valid_attrs %{action_name: "some action_name", service_id: 1}
-    @update_attrs %{action_name: "some updated action_name", service_id: 2}
+    @valid_attrs %{action_name: "some action_name", service: "Example"}
+    @update_attrs %{action_name: "some updated action_name", service: "Example"}
     @invalid_attrs %{action_name: nil}
 
     def implementation_fixture(attrs \\ %{}) do

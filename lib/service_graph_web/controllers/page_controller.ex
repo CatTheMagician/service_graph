@@ -2,6 +2,7 @@ defmodule ServiceGraphWeb.PageController do
   use ServiceGraphWeb, :controller
 
   alias ServiceGraph.Implementations
+  alias ServiceGraph.UseCases.CalculateServiceSize
   alias ServiceGraph.Consumes
   alias ServiceGraph.Services
 
@@ -13,19 +14,26 @@ defmodule ServiceGraphWeb.PageController do
     services =
       Services.list_services()
       |> Enum.map(fn service ->
+        size = CalculateServiceSize.call(service)
+
         %{
-          size: 50,
+          size: 50 + size,
           shape: "dot",
-          mass: 1,
+          mass: size,
           label: service.title,
-          id: "service_#{service.id}"
+          id: service.title
         }
       end)
 
     actions =
       Implementations.list_implementations()
       |> Enum.map(fn impl ->
-        %{shape: "box", mass: 5, label: "#" <> impl.action_name, id: "action_#{impl.id}"}
+        %{
+          shape: "box",
+          mass: 5,
+          label: "#" <> impl.action_name,
+          id: "#{impl.service}_#{impl.action_name}"
+        }
       end)
 
     services ++ actions
@@ -36,8 +44,8 @@ defmodule ServiceGraphWeb.PageController do
       Implementations.list_implementations()
       |> Enum.map(fn impl ->
         %{
-          from: "service_#{impl.service_id}",
-          to: "action_#{impl.id}"
+          from: impl.service,
+          to: "#{impl.service}_#{impl.action_name}"
         }
       end)
 
@@ -47,8 +55,8 @@ defmodule ServiceGraphWeb.PageController do
         %{
           dashes: true,
           arrows: "to",
-          from: "service_#{consume.service_id}",
-          to: "action_#{consume.action_id}"
+          from: consume.service,
+          to: "#{consume.external_service}_#{consume.external_action_name}"
         }
       end)
 

@@ -21,6 +21,14 @@ defmodule ServiceGraph.Consumes do
     Repo.all(Consume)
   end
 
+  def get_consume_by_service_and_action_name(service, ext_service, ext_action) do
+    Repo.get_by(Consume, %{
+      service: service,
+      external_service: ext_service,
+      external_action_name: ext_action
+    })
+  end
+
   @doc """
   Gets a single consume.
 
@@ -89,8 +97,8 @@ defmodule ServiceGraph.Consumes do
     Repo.delete(consume)
   end
 
-  def delete_consumes_by_service_id(id) do
-    query = from(t in Consume, where: t.service_id == ^id)
+  def delete_consumes_by_service_name(title) do
+    query = from(t in Consume, where: t.service == ^title)
 
     Repo.delete_all(query)
   end

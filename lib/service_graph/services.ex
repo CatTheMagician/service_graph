@@ -7,6 +7,14 @@ defmodule ServiceGraph.Services do
   alias ServiceGraph.Repo
 
   alias ServiceGraph.Services.Service
+  alias ServiceGraph.Consumes.Consume
+
+  def consumes_count(service_name) do
+    from(c in Consume)
+    |> where([c], c.external_service == ^service_name)
+    |> select([c], count(c))
+    |> Repo.one()
+  end
 
   @doc """
   Returns the list of services.

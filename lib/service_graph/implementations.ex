@@ -37,8 +37,8 @@ defmodule ServiceGraph.Implementations do
   """
   def get_implementation!(id), do: Repo.get!(Implementation, id)
 
-  def get_implementation_by_service_id_and_action_name(service_id, action_name) do
-    Repo.get_by(Implementation, %{service_id: service_id, action_name: action_name})
+  def get_implementation_by_service_and_action_name(service_name, action_name) do
+    Repo.get_by(Implementation, %{service: service_name, action_name: action_name})
   end
 
   @doc """
@@ -93,8 +93,8 @@ defmodule ServiceGraph.Implementations do
     Repo.delete(implementation)
   end
 
-  def delete_implementations_by_service_id(id) do
-    query = from(t in Implementation, where: t.service_id == ^id)
+  def delete_implementations_by_service_name(title) do
+    query = from(t in Implementation, where: t.service == ^title)
 
     Repo.delete_all(query)
   end

@@ -17,8 +17,6 @@ defmodule ServiceGraphWeb.Router do
     pipe_through :browser
 
     resources "/services", ServiceController
-    resources "/implementations", ImplementationController
-    resources "/consumes", ConsumeController
 
     get "/", PageController, :index
   end

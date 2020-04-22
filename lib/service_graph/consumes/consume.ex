@@ -3,8 +3,9 @@ defmodule ServiceGraph.Consumes.Consume do
   import Ecto.Changeset
 
   schema "consumes" do
-    field :action_id, :id
-    field :service_id, :id
+    field :external_service, :string
+    field :external_action_name, :string
+    field :service, :string
 
     timestamps()
   end
@@ -12,7 +13,7 @@ defmodule ServiceGraph.Consumes.Consume do
   @doc false
   def changeset(consume, attrs) do
     consume
-    |> cast(attrs, [:service_id, :action_id])
-    |> validate_required([:service_id, :action_id])
+    |> cast(attrs, [:external_service, :external_action_name, :service])
+    |> validate_required([:external_service, :external_action_name, :service])
   end
 end

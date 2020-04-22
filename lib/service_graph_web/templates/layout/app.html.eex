@@ -13,8 +13,6 @@
       <section class="container">
         <a href="/">ServiceGraph</a>
         <a href="/services">ServiceController</a>
-        <a href="/implementations">ImplementationController</a>
-        <a href="/consumes">ConsumeController</a>
       </section>
     </header>
       <%= render @view_module, @view_template, assigns %>

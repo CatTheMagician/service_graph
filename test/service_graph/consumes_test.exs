@@ -6,9 +6,21 @@ defmodule ServiceGraph.ConsumesTest do
   describe "consumes" do
     alias ServiceGraph.Consumes.Consume
 
-    @valid_attrs %{action_id: 1, service_id: 1}
-    @update_attrs %{action_id: 1, service_id: 1}
-    @invalid_attrs %{action_id: nil, service_id: 1}
+    @valid_attrs %{
+      external_service: "Motivation",
+      external_action_name: "do_it!",
+      service: "Example"
+    }
+    @update_attrs %{
+      external_service: "Motivation",
+      external_action_name: "just_do_it!",
+      service: "Example"
+    }
+    @invalid_attrs %{
+      external_service: "Motivation",
+      external_action_name: nil,
+      service: "Example"
+    }
 
     def consume_fixture(attrs \\ %{}) do
       {:ok, consume} =

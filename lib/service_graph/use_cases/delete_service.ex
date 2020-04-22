@@ -9,8 +9,8 @@ defmodule ServiceGraph.UseCases.DeleteService do
   def call(service_id) do
     service = Services.get_service!(service_id)
     Logger.info("UseCases.DeleteService: deleting #{service.title}")
-    Implementations.delete_implementations_by_service_id(service.id)
-    Consumes.delete_consumes_by_service_id(service.id)
+    Implementations.delete_implementations_by_service_name(service.title)
+    Consumes.delete_consumes_by_service_name(service.title)
     {:ok, _service} = Services.delete_service(service)
 
     :ok

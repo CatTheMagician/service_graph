@@ -13,20 +13,17 @@ defmodule ServiceGraph.UseCases.RelationBulkUpdateTest do
 
     assert [
              %ServiceGraph.Consumes.Consume{
-               action_id: _,
-               service_id: _
+               service: _
              },
              %ServiceGraph.Consumes.Consume{
-               action_id: _,
-               service_id: _
+               service: _
              },
              %ServiceGraph.Consumes.Consume{
-               action_id: _,
-               service_id: _
+               service: _
              },
              %ServiceGraph.Implementations.Implementation{
                action_name: "get_user_profile",
-               service_id: _
+               service: _
              }
            ] = RelationBulkUpdate.call("FooService", data)
   end

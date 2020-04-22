@@ -4,7 +4,7 @@ defmodule ServiceGraph.Implementations.Implementation do
 
   schema "implementations" do
     field :action_name, :string
-    field :service_id, :id
+    field :service, :string
 
     timestamps()
   end
@@ -12,7 +12,7 @@ defmodule ServiceGraph.Implementations.Implementation do
   @doc false
   def changeset(implementation, attrs) do
     implementation
-    |> cast(attrs, [:action_name, :service_id])
-    |> validate_required([:action_name, :service_id])
+    |> cast(attrs, [:action_name, :service])
+    |> validate_required([:action_name, :service])
   end
 end
