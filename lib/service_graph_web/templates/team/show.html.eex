@@ -1,0 +1,18 @@
+<h1>Show Team</h1>
+
+<ul>
+
+  <li>
+    <strong>Services:</strong>
+    <%= @team.services %>
+  </li>
+
+  <li>
+    <strong>Color:</strong>
+    <%= @team.color %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.team_path(@conn, :edit, @team) %></span>
+<span><%= link "Back", to: Routes.team_path(@conn, :index) %></span>

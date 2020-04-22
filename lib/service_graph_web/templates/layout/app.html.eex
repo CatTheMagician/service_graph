@@ -12,6 +12,7 @@
     <header>
       <section class="container">
         <a href="/">ServiceGraph</a>
+        <a href="/teams">Teams</a>
         <a href="/services">ServiceController</a>
       </section>
     </header>

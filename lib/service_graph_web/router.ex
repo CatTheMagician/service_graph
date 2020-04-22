@@ -17,6 +17,7 @@ defmodule ServiceGraphWeb.Router do
     pipe_through :browser
 
     resources "/services", ServiceController
+    resources "/teams", TeamController
 
     get "/", PageController, :index
   end

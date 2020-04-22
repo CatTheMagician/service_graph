@@ -5,12 +5,34 @@ defmodule ServiceGraphWeb.PageController do
   alias ServiceGraph.UseCases.CalculateServiceSize
   alias ServiceGraph.Consumes
   alias ServiceGraph.Services
+  alias ServiceGraph.Teams
 
   def index(conn, _params) do
-    render(conn, "index.html", nodes: nodes(), edges: edges())
+    colors = select_colors()
+    render(conn, "index.html", nodes: nodes(colors), edges: edges(colors))
   end
 
-  defp nodes do
+  defp color_for_service_nodes(colors, service) do
+    default_color = "#D2E5FF"
+
+    %{
+      background: colors[service] || default_color,
+      highlight: %{
+        background: colors[service] || default_color
+      }
+    }
+  end
+
+  defp color_for_service_edges(colors, service) do
+    default_color = "#D2E5FF"
+
+    %{
+      color: colors[service] || default_color,
+      highlight: colors[service] || default_color
+    }
+  end
+
+  defp nodes(colors) do
     services =
       Services.list_services()
       |> Enum.map(fn service ->
@@ -20,6 +42,7 @@ defmodule ServiceGraphWeb.PageController do
           size: 50 + size,
           shape: "dot",
           mass: size,
+          color: color_for_service_nodes(colors, service.title),
           label: service.title,
           id: service.title
         }
@@ -31,6 +54,7 @@ defmodule ServiceGraphWeb.PageController do
         %{
           shape: "box",
           mass: 5,
+          color: color_for_service_nodes(colors, impl.service),
           label: "#" <> impl.action_name,
           id: "#{impl.service}_#{impl.action_name}"
         }
@@ -39,12 +63,22 @@ defmodule ServiceGraphWeb.PageController do
     services ++ actions
   end
 
-  defp edges do
+  defp edges(colors) do
     implementations =
       Implementations.list_implementations()
       |> Enum.map(fn impl ->
         %{
+          width: 2,
+          selectionWidth: 8,
+          shadow: %{
+            size: 5,
+            x: 0,
+            y: 0,
+            color: "#2d7be9",
+            enabled: true
+          },
           from: impl.service,
+          color: color_for_service_edges(colors, impl.service),
           to: "#{impl.service}_#{impl.action_name}"
         }
       end)
@@ -54,12 +88,29 @@ defmodule ServiceGraphWeb.PageController do
       |> Enum.map(fn consume ->
         %{
           dashes: true,
+          shadow: %{
+            size: 5,
+            x: 0,
+            y: 0,
+            color: "#2d7be9",
+            enabled: true
+          },
+          width: 2,
+          selectionWidth: 8,
           arrows: "to",
+          color: color_for_service_edges(colors, consume.service),
           from: consume.service,
           to: "#{consume.external_service}_#{consume.external_action_name}"
         }
       end)
 
     implementations ++ consuming
+  end
+
+  defp select_colors() do
+    Teams.list_teams()
+    |> Enum.map(fn team -> Enum.map(team.services, fn service -> {service, team.color} end) end)
+    |> List.flatten()
+    |> Map.new()
   end
 end
