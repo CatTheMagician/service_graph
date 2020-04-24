@@ -7,6 +7,7 @@ defmodule ServiceGraph.UseCases.RelationBulkUpdate do
 
   def call(service_name, list_of_data) do
     list_of_data
+    |> Enum.map(fn str -> String.trim(str) end)
     |> Enum.map(fn str -> define_relation(service_name, str) end)
     |> Enum.map(&find_or_create_relation/1)
   end
@@ -82,7 +83,8 @@ defmodule ServiceGraph.UseCases.RelationBulkUpdate do
   end
 
   defp define_relation(service_name, string) do
-    [relation, substring] = String.split(string, " ")
+    clear_str = String.replace(string, ~r/\s{2,}/, " ")
+    [_comment_char, _sg_tag, relation, substring] = Enum.map(String.split(clear_str, " "), &String.trim/1)
 
     case relation do
       "uses" ->
