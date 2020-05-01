@@ -26,3 +26,63 @@ hr {
   width: 300px;
   margin-right: 50px;
 }
+
+.input_field {
+  width: 100%;
+  height: 24px;
+}
+
+.service_network {
+  display: flex;
+  margin: 5px;
+  height: 90%;
+}
+
+.service_network .canvas {
+  flex: 80%;
+}
+
+.service_network .panel {
+  flex: 20%;
+  background-color: transparent;
+}
+
+.service_network .panel ul {
+  overflow-y: scroll;
+  max-height: 600px;
+}
+
+.service_network input {
+  flex: 20%;
+  background-color: transparent;
+}
+
+.a_button {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #0069d9;
+  display: inline;
+  margin: 5px;
+}
+
+ul {
+  list-style: square inside;
+  margin-left: 10px;
+}
+
+.checkbox_li label, input {
+  font-weight: inherit;
+  display: inline;
+  word-wrap: break-word;
+}
+
+.checkbox_group {
+  border: 0.1rem solid #d1d1d1;
+  border-radius: .4rem;
+  box-shadow: none;
+  box-sizing: inherit;
+  height: 3.8rem;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+}

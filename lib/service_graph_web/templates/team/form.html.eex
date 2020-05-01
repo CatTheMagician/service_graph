@@ -5,12 +5,15 @@
     </div>
   <% end %>
 
-  <%= label f, :services %>
-  <%= multiple_select f, :services, @services %>
-  <%= error_tag f, :services %>
+  <%= render_shared "checkbox_group.html", 
+    selected_values: @changeset.data.services, 
+    options: @services, 
+    group_label: "Сервисы",
+    group_name: "team[services][]" 
+  %>
 
   <%= label f, :color %>
-  <%= text_input f, :color %>
+  <%= color_input f, :color, value: @changeset.data.color %>
   <%= error_tag f, :color %>
 
   <div>

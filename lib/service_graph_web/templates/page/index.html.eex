@@ -5,8 +5,15 @@
   <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/implementation.png") %>"><span>реализует API</span></img></div>
 </div>
 <hr/>
-<div id="service_network" style="width:100%; height: 100%" 
-  nodes="<%=Jason.encode!(@nodes)%>"
-  edges="<%=Jason.encode!(@edges)%>"
->
+<div class="service_network">
+  <div id="service_network" class="canvas" style="width:100%; height: 100%" 
+    nodes="<%=Jason.encode!(@nodes)%>"
+    edges="<%=Jason.encode!(@edges)%>"
+  >
+  </div>
+  <div class="panel">
+    <div class="search_panel"
+      nodes="<%=Jason.encode!(@nodes)%>"
+    ></div>
+  </div>
 </div>

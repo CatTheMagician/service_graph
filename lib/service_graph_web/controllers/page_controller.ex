@@ -41,7 +41,7 @@ defmodule ServiceGraphWeb.PageController do
         %{
           size: 50 + size,
           shape: "dot",
-          mass: size,
+          mass: size/4,
           color: color_for_service_nodes(colors, service.title),
           label: service.title,
           id: service.title
@@ -53,7 +53,7 @@ defmodule ServiceGraphWeb.PageController do
       |> Enum.map(fn impl ->
         %{
           shape: "box",
-          mass: 5,
+          mass: 3,
           color: color_for_service_nodes(colors, impl.service),
           label: "#" <> impl.action_name,
           id: "#{impl.service}_#{impl.action_name}"

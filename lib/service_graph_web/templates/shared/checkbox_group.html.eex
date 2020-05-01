@@ -1,0 +1,20 @@
+<div class="checkbox_group">
+  <label><%= @group_label %></label>
+  <div class="a_button" onclick="select_all('<%= @group_name %>');">Отметить все</div> 
+  <div class="a_button" onclick="deselect_all('<%= @group_name %>');">Cнять все</div> 
+  <hr/>
+  <ul>
+    <%= for {option, id} <- @options do %>
+      <li class="checkbox_li">
+        <input 
+          class="<%= @group_name %>"
+          type="checkbox" id="<%= id %>" 
+          name="<%= @group_name %>" 
+          value="<%= id %>"
+          <%= if id in (@selected_values || []), do: "checked" %>
+        >
+        <label for="<%= id %>"><%= option %></label>
+      </li>
+    <% end %>
+  </ul>
+</div>
