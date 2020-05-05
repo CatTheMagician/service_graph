@@ -11,20 +11,21 @@ defmodule ServiceGraph.UseCases.RelationBulkUpdateTest do
       "#  SG_tag: implements get_user_profile"
     ]
 
-    assert [
-             %ServiceGraph.Consumes.Consume{
-               service: _
-             },
-             %ServiceGraph.Consumes.Consume{
-               service: _
-             },
-             %ServiceGraph.Consumes.Consume{
-               service: _
-             },
-             %ServiceGraph.Implementations.Implementation{
-               action_name: "get_user_profile",
-               service: _
-             }
-           ] = RelationBulkUpdate.call("FooService", data)
+    assert {:ok,
+            [
+              %ServiceGraph.Consumes.Consume{
+                service: _
+              },
+              %ServiceGraph.Consumes.Consume{
+                service: _
+              },
+              %ServiceGraph.Consumes.Consume{
+                service: _
+              },
+              %ServiceGraph.Implementations.Implementation{
+                action_name: "get_user_profile",
+                service: _
+              }
+            ]} = RelationBulkUpdate.call("FooService", data)
   end
 end

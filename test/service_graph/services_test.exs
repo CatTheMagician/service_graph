@@ -66,5 +66,11 @@ defmodule ServiceGraph.ServicesTest do
 
       assert Services.list_services_with_consumes_count() == [{"some title", 0}]
     end
+
+    test "delete_service_by_title" do
+      service = service_fixture()
+
+      assert {1, nil} = Services.delete_service_by_title(service.title)
+    end
   end
 end

@@ -108,6 +108,12 @@ defmodule ServiceGraph.Services do
     Repo.delete(service)
   end
 
+  def delete_service_by_title(service_title) do
+    from(s in Service)
+    |> where([s], s.title == ^service_title)
+    |> Repo.delete_all()
+  end
+
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking service changes.
 

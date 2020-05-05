@@ -4,12 +4,18 @@ defmodule ServiceGraph.UseCases.RelationBulkUpdate do
   alias ServiceGraph.Services
   alias ServiceGraph.Implementations
   alias ServiceGraph.Consumes
+  alias ServiceGraph.UseCases.DeleteService
+  alias ServiceGraph.Repo
 
   def call(service_name, list_of_data) do
-    list_of_data
-    |> Enum.map(fn str -> String.trim(str) end)
-    |> Enum.map(fn str -> define_relation(service_name, str) end)
-    |> Enum.map(&find_or_create_relation/1)
+    Repo.transaction(fn ->
+      DeleteService.call(service_name)
+
+      list_of_data
+      |> Enum.map(fn str -> String.trim(str) end)
+      |> Enum.map(fn str -> define_relation(service_name, str) end)
+      |> Enum.map(&find_or_create_relation/1)
+    end)
   end
 
   defp find_or_create_relation({:implements, service_name, action_name}) do

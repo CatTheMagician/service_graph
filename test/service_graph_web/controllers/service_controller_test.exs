@@ -76,9 +76,8 @@ defmodule ServiceGraphWeb.ServiceControllerTest do
       conn = delete(conn, Routes.service_path(conn, :delete, service))
       assert redirected_to(conn) == Routes.service_path(conn, :index)
 
-      assert_error_sent 404, fn ->
-        get(conn, Routes.service_path(conn, :show, service))
-      end
+      conn = get(conn, Routes.service_path(conn, :show, service))
+      assert response(conn, 200)
     end
   end
 

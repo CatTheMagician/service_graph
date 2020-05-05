@@ -6,12 +6,11 @@ defmodule ServiceGraph.UseCases.DeleteService do
   alias ServiceGraph.Services
   require Logger
 
-  def call(service_id) do
-    service = Services.get_service!(service_id)
-    Logger.info("UseCases.DeleteService: deleting #{service.title}")
-    Implementations.delete_implementations_by_service_name(service.title)
-    Consumes.delete_consumes_by_service_name(service.title)
-    {:ok, _service} = Services.delete_service(service)
+  def call(service_title) do
+    Logger.info("UseCases.DeleteService: deleting #{service_title}")
+    Implementations.delete_implementations_by_service_name(service_title)
+    Consumes.delete_consumes_by_service_name(service_title)
+    {_count, _nil} = Services.delete_service_by_title(service_title)
 
     :ok
   end
