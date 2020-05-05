@@ -100,3 +100,33 @@ ul {
 .font-border {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+
+.stats {
+  background-color: #24292E;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  padding: 4px;
+  max-width: 400px;
+  border-radius: 8px;
+}
+
+.stats hr {
+  margin-top: -15px;
+  margin-bottom: 3px;
+  border-color: white;
+}
+.stats .author {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.stats .inserted {
+  color: greenyellow;
+}
+
+.stats .deleted {
+  color: orangered;
+}
+
+.stats .files {
+  color: lightsalmon;
+}

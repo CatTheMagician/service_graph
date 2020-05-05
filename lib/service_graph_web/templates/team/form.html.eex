@@ -13,7 +13,7 @@
   <%= render_shared "checkbox_group.html", 
     selected_values: @changeset.data.services, 
     options: @services, 
-    group_label: "Сервисы",
+    group_label: "Services",
     group_name: "team[services][]" 
   %>
 

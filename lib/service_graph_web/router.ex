@@ -15,8 +15,20 @@ defmodule ServiceGraphWeb.Router do
 
   scope "/", ServiceGraphWeb do
     pipe_through :browser
+    # resources "/services", ServiceController
 
-    resources "/services", ServiceController
+    get "/services", ServiceController, :index
+    get "/services/new", ServiceController, :new
+    get "/services/:service_name", ServiceController, :show
+    post "/services", ServiceController, :create
+    delete "/services/:service_name", ServiceController, :delete
+
+    # get "/services/:service_name", ServiceController, :show
+    # get "/services/new", ServiceController, :new
+    # post "/services/create", ServiceController, :create
+    # get "/services", ServiceController, :index
+    # delete "/services/:service_name", ServiceController, :delete
+
     resources "/teams", TeamController
 
     get "/", PageController, :index

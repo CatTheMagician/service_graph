@@ -7,11 +7,13 @@ defmodule ServiceGraph.UseCases.RelationBulkUpdate do
   alias ServiceGraph.UseCases.DeleteService
   alias ServiceGraph.Repo
 
-  def call(service_name, list_of_data) do
+  def call(service_name, definitions, gitstats) do
     Repo.transaction(fn ->
       DeleteService.call(service_name)
 
-      list_of_data
+      _service = find_service_or_create(service_name, gitstats)
+
+      definitions
       |> Enum.map(fn str -> String.trim(str) end)
       |> Enum.map(fn str -> define_relation(service_name, str) end)
       |> Enum.map(&find_or_create_relation/1)
@@ -75,17 +77,57 @@ defmodule ServiceGraph.UseCases.RelationBulkUpdate do
     end
   end
 
-  defp find_service_or_create(title) do
+  defp find_service_or_create(title, gitstats \\ %{}) do
     service = Services.get_service_by_title(title)
 
     case is_nil(service) do
       true ->
-        {:ok, service} = Services.create_service(%{title: title})
+        {:ok, service} =
+          Services.create_service(%{title: title, gitstats: prepare_gitstats(gitstats)})
+
         service
 
       false ->
+        if !is_nil(gitstats) do
+          map = prepare_gitstats(gitstats)
+          Services.update_service(service, %{gitstats: map})
+        end
+
         service
     end
+  end
+
+  def prepare_gitstats(gitstats) when is_nil(gitstats) do
+    %{}
+  end
+
+  def prepare_gitstats(gitstats) when is_map(gitstats) do
+    gitstats
+  end
+
+  def prepare_gitstats(gitstats) do
+    gitstats
+    |> String.split("\n", trim: true)
+    |> Enum.reduce(%{}, fn str, acc ->
+      [author, files, inserted, deleted, delta] = String.split(str, ",", trim: true)
+
+      author = %{
+        author => %{
+          files: to_int(files),
+          inserted: to_int(inserted),
+          deleted: to_int(deleted),
+          delta: to_int(delta)
+        }
+      }
+
+      Map.merge(acc, author)
+    end)
+  end
+
+  defp to_int(string) do
+    string
+    |> String.trim()
+    |> String.to_integer()
   end
 
   defp define_relation(service_name, string) do

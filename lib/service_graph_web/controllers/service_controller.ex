@@ -20,21 +20,20 @@ defmodule ServiceGraphWeb.ServiceController do
       {:ok, service} ->
         conn
         |> put_flash(:info, "Service created successfully.")
-        |> redirect(to: Routes.service_path(conn, :show, service))
+        |> redirect(to: Routes.service_path(conn, :show, service.title))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    service = Services.get_service!(id)
+  def show(conn, %{"service_name" => title}) do
+    service = Services.get_service_by_title!(title)
     render(conn, "show.html", service: service)
   end
 
-  def delete(conn, %{"id" => id}) do
-    service = Services.get_service!(id)
-    :ok = DeleteService.call(service.title)
+  def delete(conn, %{"service_name" => title}) do
+    :ok = DeleteService.call(title)
 
     conn
     |> put_flash(:info, "Service deleted successfully.")

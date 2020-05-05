@@ -1,7 +1,7 @@
 <div class="checkbox_group">
   <label><%= @group_label %></label>
-  <div class="a_button" onclick="select_all('<%= @group_name %>');">Отметить все</div> 
-  <div class="a_button" onclick="deselect_all('<%= @group_name %>');">Cнять все</div> 
+  <div class="a_button" onclick="select_all('<%= @group_name %>');">Check all</div> 
+  <div class="a_button" onclick="deselect_all('<%= @group_name %>');">Uncheck all</div> 
   <hr/>
   <ul>
     <%= for {option, id} <- @options do %>

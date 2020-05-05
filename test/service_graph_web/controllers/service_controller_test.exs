@@ -3,8 +3,7 @@ defmodule ServiceGraphWeb.ServiceControllerTest do
 
   alias ServiceGraph.Services
 
-  @create_attrs %{title: "some title"}
-  @update_attrs %{title: "some updated title"}
+  @create_attrs %{title: "some_title"}
   @invalid_attrs %{title: nil}
 
   def fixture(:service) do
@@ -30,10 +29,10 @@ defmodule ServiceGraphWeb.ServiceControllerTest do
     test "redirects to show when data is valid", %{conn: conn} do
       conn = post(conn, Routes.service_path(conn, :create), service: @create_attrs)
 
-      assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == Routes.service_path(conn, :show, id)
+      assert %{service_name: service_name} = redirected_params(conn)
+      assert redirected_to(conn) == Routes.service_path(conn, :show, service_name)
 
-      conn = get(conn, Routes.service_path(conn, :show, id))
+      conn = get(conn, Routes.service_path(conn, :show, service_name))
       assert html_response(conn, 200) =~ "Show Service"
     end
 
@@ -47,10 +46,10 @@ defmodule ServiceGraphWeb.ServiceControllerTest do
     setup [:create_service]
 
     test "deletes chosen service", %{conn: conn, service: service} do
-      conn = delete(conn, Routes.service_path(conn, :delete, service))
+      conn = delete(conn, Routes.service_path(conn, :delete, service.title))
       assert redirected_to(conn) == Routes.service_path(conn, :index)
 
-      assert_error_sent(404, fn -> get(conn, Routes.service_path(conn, :show, service)) end)
+      assert_error_sent(404, fn -> get(conn, Routes.service_path(conn, :show, service.title)) end)
     end
   end
 

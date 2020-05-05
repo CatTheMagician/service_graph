@@ -59,6 +59,7 @@ defmodule ServiceGraph.Services do
   def get_service(id), do: Repo.get(Service, id)
 
   def get_service_by_title(title), do: Repo.get_by(Service, %{title: title})
+  def get_service_by_title!(title), do: Repo.get_by!(Service, %{title: title})
 
   @doc """
   Creates a service.

@@ -14,8 +14,8 @@
       <td><%= service.title %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.service_path(@conn, :show, service) %></span>
-        <span><%= link "Delete", to: Routes.service_path(@conn, :delete, service), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span><%= link "Show", to: Routes.service_path(@conn, :show, service.title) %></span>
+        <span><%= link "Delete", to: Routes.service_path(@conn, :delete, service.title), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
 <% end %>

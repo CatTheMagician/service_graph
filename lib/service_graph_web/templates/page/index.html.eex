@@ -1,8 +1,10 @@
 <div class="container">
-  <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/dot.png") %>"><span>сервис</span></img></div>
-  <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/action.png") %>"><span>точка интеграции (API)</span></img></div>
-  <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/arrow_dashed.png") %>"><span>использует API</span></img></div>
-  <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/implementation.png") %>"><span>реализует API</span></img></div>
+  <div class="legend-panel">
+    <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/dot.png") %>"><span>service</span></img></div>
+    <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/action.png") %>"><span>integration point (API)</span></img></div>
+    <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/arrow_dashed.png") %>"><span>uses API</span></img></div>
+    <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/implementation.png") %>"><span>implements API</span></img></div>
+  </div>
 </div>
 <hr/>
 <div class="nav_panel" teams="<%= Jason.encode!(@teams)%>"></div>

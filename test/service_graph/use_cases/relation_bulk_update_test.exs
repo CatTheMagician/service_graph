@@ -26,6 +26,6 @@ defmodule ServiceGraph.UseCases.RelationBulkUpdateTest do
                 action_name: "get_user_profile",
                 service: _
               }
-            ]} = RelationBulkUpdate.call("FooService", data)
+            ]} = RelationBulkUpdate.call("FooService", data, "")
   end
 end

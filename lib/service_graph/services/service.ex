@@ -4,6 +4,7 @@ defmodule ServiceGraph.Services.Service do
 
   schema "services" do
     field :title, :string
+    field :gitstats, :map, default: %{}
 
     timestamps()
   end
@@ -11,7 +12,7 @@ defmodule ServiceGraph.Services.Service do
   @doc false
   def changeset(service, attrs) do
     service
-    |> cast(attrs, [:title])
+    |> cast(attrs, [:title, :gitstats])
     |> validate_required([:title])
   end
 end
