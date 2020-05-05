@@ -5,6 +5,7 @@
   <div class="legeng"><img src="<%= Routes.static_path(@conn, "/images/implementation.png") %>"><span>реализует API</span></img></div>
 </div>
 <hr/>
+<div class="nav_panel" teams="<%= Jason.encode!(@teams)%>"></div>
 <div class="service_network">
   <div id="service_network" class="canvas" style="width:100%; height: 100%" 
     nodes="<%=Jason.encode!(@nodes)%>"

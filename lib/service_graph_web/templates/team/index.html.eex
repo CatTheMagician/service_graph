@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Title</th>
       <th>Services</th>
       <th>Color</th>
 
@@ -12,9 +13,14 @@
   <tbody>
 <%= for team <- @teams do %>
     <tr>
-      <td><%= team.services %></td>
-      <td><%= team.color %></td>
-
+      <td><%= team.title %></td>
+      <td><ul>
+        <%= for service <- team.services do %>
+          <li><%= service %></li>
+        <% end %>
+      </ul></td>
+      <td>
+        <div style="width: 100px; height: 40px; background-color: <%= team.color %>;"></div>
       <td>
         <span><%= link "Show", to: Routes.team_path(@conn, :show, team) %></span>
         <span><%= link "Edit", to: Routes.team_path(@conn, :edit, team) %></span>

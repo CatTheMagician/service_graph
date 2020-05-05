@@ -86,3 +86,11 @@ ul {
   height: 100%;
   margin-bottom: 20px;
 }
+
+.nav_panel {
+  width: 100%;
+}
+
+.with-margin {
+  margin: 5px;
+}

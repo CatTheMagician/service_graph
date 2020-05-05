@@ -7,28 +7,25 @@ defmodule ServiceGraphWeb.PageController do
   alias ServiceGraph.Services
   alias ServiceGraph.Teams
 
+  @default_color "#D2E5FF"
   def index(conn, _params) do
     colors = select_colors()
-    render(conn, "index.html", nodes: nodes(colors), edges: edges(colors))
+    render(conn, "index.html", teams: teams(), nodes: nodes(colors), edges: edges(colors))
   end
 
   defp color_for_service_nodes(colors, service) do
-    default_color = "#D2E5FF"
-
     %{
-      background: colors[service] || default_color,
+      background: colors[service] || @default_color,
       highlight: %{
-        background: colors[service] || default_color
+        background: colors[service] || @default_color
       }
     }
   end
 
   defp color_for_service_edges(colors, service) do
-    default_color = "#D2E5FF"
-
     %{
-      color: colors[service] || default_color,
-      highlight: colors[service] || default_color
+      color: colors[service] || @default_color,
+      highlight: colors[service] || @default_color
     }
   end
 
@@ -41,7 +38,7 @@ defmodule ServiceGraphWeb.PageController do
         %{
           size: 50 + size,
           shape: "dot",
-          mass: size/4,
+          mass: size / 4,
           color: color_for_service_nodes(colors, service.title),
           label: service.title,
           id: service.title
@@ -54,13 +51,30 @@ defmodule ServiceGraphWeb.PageController do
         %{
           shape: "box",
           mass: 3,
-          color: color_for_service_nodes(colors, impl.service),
+          # color: color_for_service_nodes(colors, impl.service),
+          color: %{
+            background: "WhiteSmoke",
+            highlight: %{
+              background: @default_color
+            }
+          },
           label: "#" <> impl.action_name,
           id: "#{impl.service}_#{impl.action_name}"
         }
       end)
 
     services ++ actions
+  end
+
+  defp teams do
+    Teams.list_teams()
+    |> Enum.map(fn team ->
+      %{
+        services: team.services,
+        title: team.title,
+        color: team.color
+      }
+    end)
   end
 
   defp edges(colors) do

@@ -1,15 +1,24 @@
 <h1>Show Team</h1>
 
 <ul>
+  <li>
+    <strong>Title:</strong>
+    <%= @team.title %>
+  </li>
 
   <li>
     <strong>Services:</strong>
-    <%= @team.services %>
+     <td><ul>
+        <%= for service <- @team.services do %>
+          <li><%= service %></li>
+        <% end %>
+      </ul></td>
   </li>
 
   <li>
     <strong>Color:</strong>
-    <%= @team.color %>
+        <div style="width: 100px; height: 40px; background-color: <%= @team.color %>;"><%= @team.color %></div>
+    <%= %>
   </li>
 
 </ul>

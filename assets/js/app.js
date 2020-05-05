@@ -41,6 +41,32 @@ var network = new vis.Network(container, data, options);
 window.data = data;
 window.network = network;
 
+window.make_gray_all = function () {
+  let map = window.network.canvas.body.nodes
+
+  Object.keys(map).forEach(function (key, _i, ) {
+    let el = map[key]
+
+    el.options.color.original_background = el.options.color.original_background || el.options.color.background;
+    el.options.color.background = 'WhiteSmoke';
+  })
+
+  window.network.redraw()
+}
+
+window.make_colored = function (name) {
+  let map = window.network.canvas.body.nodes
+  Object.keys(map).forEach(function (key, _i, ) {
+    let el = map[key]
+
+    if (el.options.shape != "box" && key.toUpperCase().includes(name.toUpperCase())) {
+      el.options.color.background = el.options.color.original_background || el.options.color.background;
+    }
+  })
+
+  window.network.redraw()
+}
+
 window.make_gray_all_except = function (name) {
   let map = window.network.canvas.body.nodes
 
@@ -64,7 +90,10 @@ Array.from(document.getElementsByClassName("search_panel")).forEach(
     let input = document.createElement('input');
     input.setAttribute("class", "input_field")
     let ul = document.createElement('ul');
-    $(input).on('input', (e) => make_gray_all_except(e.target.value))
+    $(input).on('input', function (e) {
+      make_gray_all()
+      make_colored(e.target.value)
+    })
     el.appendChild(input)
     el.appendChild(ul)
 
@@ -74,6 +103,31 @@ Array.from(document.getElementsByClassName("search_panel")).forEach(
         li.innerHTML = el.id
         ul.appendChild(li)
       }
+    })
+  }
+);
+
+// инициализируем по необходимости блоки с json
+Array.from(document.getElementsByClassName("nav_panel")).forEach(
+  function (el, _i, _array) {
+    let all = {
+      color: 'gray',
+      title: 'Все',
+      services: nodes.map((e) => e.id)
+    }
+    let teams = [all].concat(JSON.parse(el.getAttribute("teams")))
+
+    teams.forEach(function (team, _i, _array) {
+      let button = document.createElement('div');
+      button.setAttribute("class", "button with-margin")
+      button.setAttribute("style", "background-color: " + team.color)
+      button.innerHTML = team.title
+      $(button).on('click', function () {
+        make_gray_all()
+        team.services.forEach((service, _i, _arr) => make_colored(service))
+      })
+
+      el.appendChild(button)
     })
   }
 );

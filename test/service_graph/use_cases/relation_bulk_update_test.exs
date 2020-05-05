@@ -5,10 +5,10 @@ defmodule ServiceGraph.UseCases.RelationBulkUpdateTest do
 
   test "#сall - deletes old data and inserts new" do
     data = [
-      "uses Amazon::S3#store_document",
-      "uses Amazon::S3#read_document",
-      "uses BarService#get_user_data",
-      "implements get_user_profile"
+      "// SG_tag: uses Amazon::S3#store_document",
+      "// SG_tag: uses Amazon::S3#read_document",
+      "#  SG_tag: uses BarService#get_user_data",
+      "#  SG_tag: implements get_user_profile"
     ]
 
     assert [

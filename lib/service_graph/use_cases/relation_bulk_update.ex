@@ -84,7 +84,9 @@ defmodule ServiceGraph.UseCases.RelationBulkUpdate do
 
   defp define_relation(service_name, string) do
     clear_str = String.replace(string, ~r/\s{2,}/, " ")
-    [_comment_char, _sg_tag, relation, substring] = Enum.map(String.split(clear_str, " "), &String.trim/1)
+
+    [_comment_char, _sg_tag, relation, substring] =
+      Enum.map(String.split(clear_str, " "), &String.trim/1)
 
     case relation do
       "uses" ->

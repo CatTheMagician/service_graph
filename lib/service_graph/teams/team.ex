@@ -3,6 +3,7 @@ defmodule ServiceGraph.Teams.Team do
   import Ecto.Changeset
 
   schema "teams" do
+    field :title, :string
     field :color, :string
     field :services, {:array, :string}
 
@@ -12,7 +13,7 @@ defmodule ServiceGraph.Teams.Team do
   @doc false
   def changeset(team, attrs) do
     team
-    |> cast(attrs, [:services, :color])
+    |> cast(attrs, [:title, :services, :color])
     |> validate_required([:services, :color])
   end
 end

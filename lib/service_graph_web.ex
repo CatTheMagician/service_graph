@@ -43,7 +43,7 @@ defmodule ServiceGraphWeb do
       import ServiceGraphWeb.Gettext
       alias ServiceGraphWeb.Router.Helpers, as: Routes
 
-     def render_shared(template, assigns \\ []) do
+      def render_shared(template, assigns \\ []) do
         render(ServiceGraphWeb.SharedView, template, assigns)
       end
     end
