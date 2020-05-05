@@ -43,32 +43,6 @@ defmodule ServiceGraphWeb.ServiceControllerTest do
     end
   end
 
-  describe "edit service" do
-    setup [:create_service]
-
-    test "renders form for editing chosen service", %{conn: conn, service: service} do
-      conn = get(conn, Routes.service_path(conn, :edit, service))
-      assert html_response(conn, 200) =~ "Edit Service"
-    end
-  end
-
-  describe "update service" do
-    setup [:create_service]
-
-    test "redirects when data is valid", %{conn: conn, service: service} do
-      conn = put(conn, Routes.service_path(conn, :update, service), service: @update_attrs)
-      assert redirected_to(conn) == Routes.service_path(conn, :show, service)
-
-      conn = get(conn, Routes.service_path(conn, :show, service))
-      assert html_response(conn, 200) =~ "some updated title"
-    end
-
-    test "renders errors when data is invalid", %{conn: conn, service: service} do
-      conn = put(conn, Routes.service_path(conn, :update, service), service: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Edit Service"
-    end
-  end
-
   describe "delete service" do
     setup [:create_service]
 
@@ -76,8 +50,7 @@ defmodule ServiceGraphWeb.ServiceControllerTest do
       conn = delete(conn, Routes.service_path(conn, :delete, service))
       assert redirected_to(conn) == Routes.service_path(conn, :index)
 
-      conn = get(conn, Routes.service_path(conn, :show, service))
-      assert response(conn, 200)
+      assert_error_sent(404, fn -> get(conn, Routes.service_path(conn, :show, service)) end)
     end
   end
 

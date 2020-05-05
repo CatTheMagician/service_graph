@@ -26,13 +26,17 @@ defmodule ServiceGraph.Services do
 
   """
   def list_services do
-    Repo.all(Service)
+    from(s in Service)
+    |> order_by([s], asc: s.title)
+    |> select([s], s)
+    |> Repo.all()
   end
 
   def list_services_with_consumes_count do
     from(s in Service)
     |> join(:left, [s], c in Consume, on: c.external_service == s.title)
     |> group_by([s, c], s.title)
+    |> order_by([s, c], asc: s.title)
     |> select([s, c], {s.title, count(c)})
     |> Repo.all()
   end

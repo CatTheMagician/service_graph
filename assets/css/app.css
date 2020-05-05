@@ -2,6 +2,8 @@
 
 @import "./phoenix.css";
 html, body {
+  padding-left: 20px;
+  padding-right: 20px;
   height: 90%;
 }
 

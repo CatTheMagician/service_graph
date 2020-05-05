@@ -20,7 +20,8 @@
         <% end %>
       </ul></td>
       <td>
-        <div style="width: 100px; height: 40px; background-color: <%= team.color %>;"></div>
+        <div style="width: 100px; border: 1px solid black; height: 40px; background-color: <%= team.color %>;">
+        </div>
       <td>
         <span><%= link "Show", to: Routes.team_path(@conn, :show, team) %></span>
         <span><%= link "Edit", to: Routes.team_path(@conn, :edit, team) %></span>

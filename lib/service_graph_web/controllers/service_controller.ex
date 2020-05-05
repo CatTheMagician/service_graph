@@ -32,28 +32,9 @@ defmodule ServiceGraphWeb.ServiceController do
     render(conn, "show.html", service: service)
   end
 
-  def edit(conn, %{"id" => id}) do
-    service = Services.get_service!(id)
-    changeset = Services.change_service(service)
-    render(conn, "edit.html", service: service, changeset: changeset)
-  end
-
-  def update(conn, %{"id" => id, "service" => service_params}) do
-    service = Services.get_service!(id)
-
-    case Services.update_service(service, service_params) do
-      {:ok, service} ->
-        conn
-        |> put_flash(:info, "Service updated successfully.")
-        |> redirect(to: Routes.service_path(conn, :show, service))
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", service: service, changeset: changeset)
-    end
-  end
-
   def delete(conn, %{"id" => id}) do
-    :ok = DeleteService.call(id)
+    service = Services.get_service!(id)
+    :ok = DeleteService.call(service.title)
 
     conn
     |> put_flash(:info, "Service deleted successfully.")
