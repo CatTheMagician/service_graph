@@ -42,7 +42,7 @@ defmodule ServiceGraph.UseCases.GraphVis do
       Services.list_services_with_consumes_count()
       |> Enum.map(fn {service_title, count_of_consumes} ->
         %{
-          size: 50 + count_of_consumes,
+          size: 50 + count_of_consumes * 10,
           shape: "dot",
           mass: count_of_consumes / 4,
           color: color_for_service_nodes(colors, service_title),

@@ -119,7 +119,7 @@ Array.from(document.getElementsByClassName("nav_panel")).forEach(
 
     teams.forEach(function (team, _i, _array) {
       let button = document.createElement('div');
-      button.setAttribute("class", "button with-margin")
+      button.setAttribute("class", "button with-margin font-border")
       button.setAttribute("style", "background-color: " + team.color)
       button.innerHTML = team.title
       $(button).on('click', function () {
