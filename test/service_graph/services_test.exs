@@ -60,5 +60,11 @@ defmodule ServiceGraph.ServicesTest do
       service = service_fixture()
       assert %Ecto.Changeset{} = Services.change_service(service)
     end
+
+    test "list_services_with_consumes_count/ returns services and consumes count" do
+      _service = service_fixture()
+
+      assert Services.list_services_with_consumes_count() == [{"some title", 0}]
+    end
   end
 end

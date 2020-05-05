@@ -29,6 +29,14 @@ defmodule ServiceGraph.Services do
     Repo.all(Service)
   end
 
+  def list_services_with_consumes_count do
+    from(s in Service)
+    |> join(:left, [s], c in Consume, on: c.external_service == s.title)
+    |> group_by([s, c], s.title)
+    |> select([s, c], {s.title, count(c)})
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single service.
 

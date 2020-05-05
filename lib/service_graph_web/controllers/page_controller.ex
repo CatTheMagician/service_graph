@@ -2,7 +2,6 @@ defmodule ServiceGraphWeb.PageController do
   use ServiceGraphWeb, :controller
 
   alias ServiceGraph.Implementations
-  alias ServiceGraph.UseCases.CalculateServiceSize
   alias ServiceGraph.Consumes
   alias ServiceGraph.Services
   alias ServiceGraph.Teams
@@ -31,17 +30,15 @@ defmodule ServiceGraphWeb.PageController do
 
   defp nodes(colors) do
     services =
-      Services.list_services()
-      |> Enum.map(fn service ->
-        size = CalculateServiceSize.call(service)
-
+      Services.list_services_with_consumes_count()
+      |> Enum.map(fn {service_title, count_of_consumes} ->
         %{
-          size: 50 + size,
+          size: 50 + count_of_consumes,
           shape: "dot",
-          mass: size / 4,
-          color: color_for_service_nodes(colors, service.title),
-          label: service.title,
-          id: service.title
+          mass: count_of_consumes / 4,
+          color: color_for_service_nodes(colors, service_title),
+          label: service_title,
+          id: service_title
         }
       end)
 
