@@ -18,7 +18,8 @@ config :service_graph, ServiceGraph.Repo,
 config :service_graph, ServiceGraphWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
-  code_reloader: false
+  code_reloader: false,
+  server: true
 
 config :phoenix, :stacktrace_depth, 20
 

@@ -46,7 +46,7 @@ defmodule ServiceGraph.UseCases.GraphVis do
         %{
           size: size,
           shape: "dot",
-          mass: count_of_consumes / 4,
+          mass: (count_of_consumes + 1) * 2,
           color: color_for_service_nodes(colors, service_title),
           label: service_title,
           id: service_title
@@ -59,13 +59,7 @@ defmodule ServiceGraph.UseCases.GraphVis do
         %{
           shape: "box",
           mass: 3,
-          # color: color_for_service_nodes(colors, impl.service),
-          color: %{
-            background: "WhiteSmoke",
-            highlight: %{
-              background: @default_color
-            }
-          },
+          color: color_for_service_nodes(colors, impl.service),
           label: "#" <> impl.action_name,
           id: "#{impl.service}_#{impl.action_name}"
         }
