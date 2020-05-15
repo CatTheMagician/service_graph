@@ -13,11 +13,13 @@ defmodule ServiceGraphWeb.Api.TeamsView do
     end)
   end
 
-  def render("show.json", %{team: %Team{} = team}) do
+  def render("team_page.json", %{services: services, team: %Team{} = team}) do
     %{
       id: team.id,
       title: team.title,
-      color: team.color
+      color: team.color,
+      team_services: team.services,
+      all_services: Enum.map(services, fn s -> s.title end)
     }
   end
 end

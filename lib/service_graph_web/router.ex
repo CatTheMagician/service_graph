@@ -10,7 +10,7 @@ defmodule ServiceGraphWeb.Router do
   end
 
   pipeline :api do
-    plug CORSPlug, origin: ["*"]
+    plug CORSPlug, origin: ["*"], headers: ["*"]
     plug :accepts, ["json"]
   end
 
@@ -31,13 +31,18 @@ defmodule ServiceGraphWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", ServiceGraphWeb do
     pipe_through :api
-
     post "/relations/:service_name/bulk_definition", Api.RelationController, :bulk_definition
     get "/services", Api.ServicesController, :list
     get "/services/:title", Api.ServicesController, :show
+    delete "/services/:title", Api.ServicesController, :delete
+    options "/services/:title", Api.ServicesController, :options
 
     get "/teams", Api.TeamsController, :list
     get "/teams/:id", Api.TeamsController, :show
+    post "/teams/create", Api.TeamsController, :create
+    options "/teams/create", Api.TeamsController, :options
+    post "/teams/:id", Api.TeamsController, :update
+    options "/teams/:id", Api.TeamsController, :options
     get "/graph", Api.RelationController, :graph
   end
 end

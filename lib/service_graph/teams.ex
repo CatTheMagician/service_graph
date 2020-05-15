@@ -18,7 +18,9 @@ defmodule ServiceGraph.Teams do
 
   """
   def list_teams do
-    Repo.all(Team)
+    from(t in Team)
+    |> order_by([t], t.id)
+    |> Repo.all()
   end
 
   @doc """
