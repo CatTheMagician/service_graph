@@ -14,20 +14,6 @@ defmodule ServiceGraphWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", ServiceGraphWeb do
-    pipe_through :browser
-
-    get "/services", ServiceController, :index
-    get "/services/new", ServiceController, :new
-    get "/services/:service_name", ServiceController, :show
-    post "/services", ServiceController, :create
-    delete "/services/:service_name", ServiceController, :delete
-
-    resources "/teams", TeamController
-
-    get "/", PageController, :index
-  end
-
   # Other scopes may use custom stacks.
   scope "/api", ServiceGraphWeb do
     pipe_through :api
@@ -44,5 +30,11 @@ defmodule ServiceGraphWeb.Router do
     post "/teams/:id", Api.TeamsController, :update
     options "/teams/:id", Api.TeamsController, :options
     get "/graph", Api.RelationController, :graph
+  end
+
+  scope "/", ServiceGraphWeb do
+    pipe_through :browser
+
+    get "/*anything", PageController, :index
   end
 end

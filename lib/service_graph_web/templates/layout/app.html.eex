@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>ServiceGraph</title>
-    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script> 
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-  </head>
-  <body>
-    <header>
-      <section class="container">
-        <a href="/">ServiceGraph</a>
-        <a href="/teams">Teams</a>
-        <a href="/services">ServiceController</a>
-      </section>
-    </header>
-      <%= render @view_module, @view_template, assigns %>
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-  </body>
-</html>
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta
+      http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport
+      content="width=device-width,initial-scale=1"><link rel=icon
+      href=/favicon.ico><title>service-graph-front</title><link
+      href=/css/app.93d514a1.css rel=preload as=style><link
+      href=/js/app.8f3a574f.js rel=preload as=script><link
+      href=/js/chunk-vendors.1cd56caf.js rel=preload as=script><link
+      href=/css/app.93d514a1.css rel=stylesheet></head><body><noscript><strong>We're
+        sorry but service-graph-front doesn't work properly without JavaScript
+        enabled. Please enable it to continue.</strong></noscript><div id=app></div><script
+      src=/js/chunk-vendors.1cd56caf.js></script><script
+      src=/js/app.8f3a574f.js></script></body></html>

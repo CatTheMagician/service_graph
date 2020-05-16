@@ -39,7 +39,6 @@ defmodule ServiceGraphWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import ServiceGraphWeb.ErrorHelpers
       import ServiceGraphWeb.Gettext
       alias ServiceGraphWeb.Router.Helpers, as: Routes
 
