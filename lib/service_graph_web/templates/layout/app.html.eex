@@ -1,1 +1,24 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>Vue App</title><link href=/static/css/app.bd3bab28.css rel=preload as=style><link href=/static/js/app.2b4b5874.js rel=preload as=script><link href=/static/js/chunk-vendors.1cd56caf.js rel=preload as=script><link href=/static/css/app.bd3bab28.css rel=stylesheet></head><body><div id=app></div><script src=/static/js/chunk-vendors.1cd56caf.js></script><script src=/static/js/app.2b4b5874.js></script></body></html>
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset=utf-8>
+      <meta http-equiv=X-UA-Compatible
+         content="IE=edge">
+      <meta name=viewport
+         content="width=device-width,initial-scale=1">
+      <title>Vue App</title>
+      <link
+         href=/static/static/css/app.css rel=preload as=style>
+      <link href=/static/static/js/app.js
+         rel=preload as=script>
+      <link href=/static/static/js/chunk-vendors.js rel=preload
+         as=script>
+      <link href=/static/static/css/app.css rel=stylesheet>
+   </head>
+   <body>
+      <div
+         id=app></div>
+      <script src=/static/static/js/chunk-vendors.js></script><script
+         src=/static/static/js/app.js></script>
+   </body>
+</html>
