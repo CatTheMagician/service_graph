@@ -11,7 +11,7 @@ export async function teamsList() {
 }
 export async function getTeam(id) {
   try {
-    const response = await axios.get("api/teams/" + id);
+    const response = await axios.get("/api/teams/" + id);
     return response;
   } catch (error) {
     console.error(error);
@@ -22,7 +22,7 @@ export async function getTeam(id) {
 export async function updateTeam(id, title, color, services) {
   try {
     const response = await axios.post(
-      "api/teams/" + id,
+      "/api/teams/" + id,
       {
         title: title,
         color: color,
@@ -39,7 +39,7 @@ export async function updateTeam(id, title, color, services) {
 export async function createTeam(id, title, color, services) {
   try {
     const response = await axios.post(
-      "api/teams/create",
+      "/api/teams/create",
       {
         title: title,
         color: color,
